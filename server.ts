@@ -9,6 +9,7 @@ import { Server } from "socket.io";
 import authRoutes from "./routes/authRoutes";
 import userRoutes from "./routes/userRoutes";
 import transactionRoutes from "./routes/transactionRoutes";
+import chatRoutes from "./routes/chatRoutes";
 
 // Import Chat model
 import Chat from "./models/Chat";
@@ -94,7 +95,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/transactions", transactionRoutes);
 // app.use("/api/messages", messageRoutes);
-// app.use("/api/chat", chatRoutes);
+app.use("/api/chat", chatRoutes);
 
 // Global Error Handler
 app.use((err: any, req: any, res: any, next: any) => {

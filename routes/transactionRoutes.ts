@@ -6,12 +6,10 @@ import {
   transferMoney,
 } from "../controllers/transactionController";
 
-import { authenticate } from "../middlewares/authenticate";
-
 const router = express.Router();
 
-router.put("/", authenticate, editTransaction);
-router.post("/transfer-money", authenticate, transferMoney);
-router.post("/pay-bill", authenticate, payBill);
+router.put("/", editTransaction);
+router.post("/transfer-money", transferMoney);
+router.post("/pay-bill", payBill);
 
 export default router;
