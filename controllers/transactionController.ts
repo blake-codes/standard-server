@@ -187,10 +187,6 @@ export const editTransaction = async (req: any, res: any) => {
       return res.status(404).json({ message: "Transaction not found." });
     }
 
-    if (updates.transactionDate) {
-      transaction.createdAt = updates.transactionDate;
-    }
-
     // Apply updates directly (including `createdAt`)
     Object.assign(transaction, updates);
 

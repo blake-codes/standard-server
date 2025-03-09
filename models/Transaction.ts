@@ -7,6 +7,7 @@ interface ITransaction extends Document {
   amount: number;
   status: "pending" | "completed" | "failed";
   details?: Record<string, any>;
+  transactionDate: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -31,6 +32,7 @@ const TransactionSchema = new Schema<ITransaction>(
       default: "pending",
     },
     details: { type: Object }, // Holds extra data like recipient, merchant, or bill info
+    transactionDate: { type: Date, default: Date.now },
   },
   { timestamps: true }
 );
