@@ -110,6 +110,32 @@ export const updateUserAccountStatus = async (req: any, res: any) => {
   }
 };
 
+export const updateUserPassword = async (req: any, res: any) => {
+  const { userId } = req.params;
+  const { currentPassword, newPassword } = req.body;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    if (user.password !== currentPassword) {
+      return res.status(404).json({ message: "Current password is incorrect" });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { $set: { password: newPassword } }, // Corrected update object
+      { new: true } // Ensure it returns the updated document
+    );
+
+    return res.status(200).json(updatedUser);
+  } catch (err) {
+    console.error("Error updating user password:", err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 export const searchUserByAccountNumber = async (req: any, res: any) => {
   const { accountNumber } = req.query;
 
