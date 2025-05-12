@@ -54,7 +54,9 @@ const generateAccountNumber = () => {
 // Helper to generate a unique username
 const generateUsername = (firstName: string, lastName: string) => {
   const randomSuffix = Math.floor(10000 + Math.random() * 90000);
-  return `${firstName.toLowerCase()}${lastName.toLowerCase()}${randomSuffix}`;
+  const cleanFirst = firstName.toLowerCase().replace(/\s+/g, "");
+  const cleanLast = lastName.toLowerCase().replace(/\s+/g, "");
+  return `${cleanFirst}${cleanLast}${randomSuffix}`;
 };
 
 const generateRoutingNumber = () => {
@@ -63,7 +65,7 @@ const generateRoutingNumber = () => {
 
 const generatePassword = (length = 8) => {
   const charset =
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
+    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   let password = "";
   for (let i = 0; i < length; i++) {
     const randomIndex = Math.floor(Math.random() * charset.length);
